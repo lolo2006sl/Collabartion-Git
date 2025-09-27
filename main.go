@@ -76,6 +76,18 @@ func main() {
 				fmt.Printf("Félicitations, le joueur %s a gagné !\n", currentPlayer)
 				break // Fin du jeu en cas de victoire
 			}
+			// Vérification de l'égalité
+			if tour == 42 {
+				// afficher la derniere grille
+				for i := 0; i < 6; i++ {
+					for j := 0; j < 7; j++ {
+						fmt.Print("[", grille[i][j], "]")
+					}
+					fmt.Println()
+				}
+				fmt.Println("Match nul")
+				break // Fin du jeu
+			}
 
 			// Changement de joueur
 			if currentPlayer == player1 {
