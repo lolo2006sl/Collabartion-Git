@@ -64,6 +64,18 @@ func main() {
 		// Ajout du pion dans la grille
 		if ajouterPion(&grille, colonne, currentPlayer) {
 			tour++
+			// Vérification de la victoire
+			if verifiervictoire(&grille, currentPlayer) {
+				// afficher la derniere grille
+				for i := 0; i < 6; i++ {
+					for j := 0; j < 7; j++ {
+						fmt.Print("[", grille[i][j], "]")
+					}
+					fmt.Println()
+				}
+				fmt.Printf("Félicitations, le joueur %s a gagné !\n", currentPlayer)
+				break // Fin du jeu en cas de victoire
+			}
 
 			// Changement de joueur
 			if currentPlayer == player1 {
@@ -73,6 +85,28 @@ func main() {
 			}
 		}
 	}
+}
+
+//----------------------------------------------------------------
+
+func verifiervictoire(grille *[6][7]string, symbole string) bool {
+	// Vérification des lignes
+	for i := 0; i < 6; i++ {
+		for j := 0; j < 4; j++ {
+			if grille[i][j] == symbole && grille[i][j+1] == symbole && grille[i][j+2] == symbole && grille[i][j+3] == symbole {
+				return true
+			}
+		}
+	}
+	// Vérification des colonnes
+	for j := 0; j < 7; j++ {
+		for i := 0; i < 3; i++ {
+			if grille[i][j] == symbole && grille[i+1][j] == symbole && grille[i+2][j] == symbole && grille[i+3][j] == symbole {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 //----------------------------------------------------------------
